@@ -8,7 +8,13 @@ class HandDetector:
         self.detection_confidence = detection_confidence
         self.tracking_confidence = tracking_confidence
         self.mpHands = mp.solutions.hands
-        self.myHands = self.mpHands.Hands()
+        if maxHands ==1:
+            self.myHands = self.mpHands.Hands(static_image_mode=False,
+                                  max_num_hands=1,  # Limit to one hand
+                                  min_detection_confidence=0.5,
+                                  min_tracking_confidence=0.5)
+        else:
+            self.myHands = self.mpHands.Hands()
         self.mpDraw = mp.solutions.drawing_utils
     def findHands(self,img,draw = True):
         imgRGB = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)

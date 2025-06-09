@@ -25,14 +25,14 @@ detector = htm.HandDetector()
 while True:
     succ,img = cap.read()
     img = cv2.flip(img,1)
-    lmList = detector.findPosition(img,draw = False)
+    lmList =  detector.findPosition(img,draw = False)
     if lmList:
         #print(lmList[4],lmList[8])
         x1,y1 = lmList[4][1:]
         x2,y2 = lmList[8][1:]
         cx,cy = (x1+x2)//2,(y1+y2)//2
         dist = distance((x1,y1),(x2,y2))
-        print(dist)
+        #print(dist)
         cv2.circle(img,(cx,cy),10,(255,255,255),cv2.FILLED)
         cv2.circle(img,(x1,y1),10,(255,255,255),cv2.FILLED)
         cv2.circle(img,(x2,y2),10,(255,255,255),cv2.FILLED)
